@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="de.lukas.americacountdown.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <DatePicker
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:id="@+id/datePicker"
+        android:clickable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:headerBackground="@color/color_datePicker" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon_x96"
+        android:layout_marginTop="9dp"
+        android:layout_marginLeft="-120dp"
+        android:layout_toEndOf="@id/datePicker"
+        android:layout_toRightOf="@id/datePicker"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/txtPreMessage"
+        android:text="@string/text_pre_message"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_below="@id/datePicker"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/color_txtDays"
+        android:id="@+id/txtDays"
+        android:text="@string/text_days_left"
+        android:textSize="100dp"
+        android:textAlignment="center"
+        android:layout_below="@id/txtPreMessage"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/txtPostMessage"
+        android:text="@string/text_post_message"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_below="@id/txtDays"
+        />
+
+
+</RelativeLayout>

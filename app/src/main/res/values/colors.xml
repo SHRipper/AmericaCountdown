@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6EBAD4</color>
+    <color name="colorPrimaryDark">#348BA8</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_datePicker">#7DADD4</color>
+    <color name="color_txtDays">#FF4081</color>
+</resources>

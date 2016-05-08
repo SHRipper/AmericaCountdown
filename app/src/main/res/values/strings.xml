@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Countdown</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="text_days_left">128</string>
+    <string name="text_pre_message">Ab heute noch</string>
+    <string name="text_post_message">mal schlafen!!!</string>
+
+</resources>
