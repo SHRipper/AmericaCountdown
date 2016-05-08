@@ -19,7 +19,7 @@ public class InitAlarmManager {
         Intent alarmIntent = new Intent(context, MyAlarmSchedulerReceiver.class);
         boolean alarmAlreadySet = (PendingIntent.getBroadcast(context, 101, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
         if (!alarmAlreadySet) {
-            Log.d("InitAlarmManager","alarm was not set. Setting Alarm");
+            Log.d("InitAlarmManager","alarm was not set before. Setting Alarm");
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 101, alarmIntent,0);
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getAlarmMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
