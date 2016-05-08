@@ -22,7 +22,7 @@ public class InitAlarmManager {
             Log.d("InitAlarmManager","alarm was not set before. Setting Alarm");
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 101, alarmIntent,0);
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getAlarmMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getAlarmMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         }
         else{
             Log.d("InitAlarmManager", "alarm was set before. do nothing.");
@@ -34,8 +34,8 @@ public class InitAlarmManager {
         Calendar cal = Calendar.getInstance();
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        int hour = 19;
-        int minute = 0;
+        int hour = 6;
+        int minute = 30;
 
         // if current time is greater than alarm manager trigger
         // then add one calendar day to avoid notification on startup
@@ -44,8 +44,8 @@ public class InitAlarmManager {
                         cal.get(Calendar.MINUTE) > minute) {
             cal.add(Calendar.DAY_OF_YEAR, 1);
         }
-        cal.set(Calendar.HOUR_OF_DAY, 20);
-        cal.set(Calendar.MINUTE, 55);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
         Log.d("Calendar", "" + cal.get(Calendar.HOUR_OF_DAY) + " . " + cal.get(Calendar.MINUTE));
 
         return cal.getTimeInMillis();
