@@ -17,8 +17,8 @@ import de.lukas.americacountdown.Core.InitAlarmManager;
 import de.lukas.americacountdown.R;
 
 public class TimePreference extends DialogPreference {
-    private int lastHour=6;
-    private int lastMinute=30;
+    private int lastHour=0;
+    private int lastMinute=0;
     private TimePicker picker=null;
 
     SharedPreferences sharedPreferences;
@@ -39,9 +39,35 @@ public class TimePreference extends DialogPreference {
         super(ctxt, attrs);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String time  = sharedPreferences.getString("key_pref_trigger_time", "6 30");
+        String parts[] = time.split(" ");
+        lastHour = Integer.valueOf(parts[0]);
+        lastMinute = Integer.valueOf(parts[1]);
 
         setPositiveButtonText("Ok");
         setNegativeButtonText("Abbrechen");
+
+    }
+
+    @Override
+    public CharSequence getSummary() {
+
+        String lastHourString = "";
+        String lastMinuteString = "";
+
+        if (lastHour< 10){
+            lastHourString = "0" + lastHour;
+        }else{
+            lastHourString = lastHour + "";
+        }
+
+        if (lastMinute < 10){
+            lastMinuteString = "0" + lastMinute;
+        }else{
+            lastMinuteString = "" + lastMinute;
+        }
+
+        return  lastHourString + ":" + lastMinuteString;
     }
 
     @Override
@@ -50,12 +76,16 @@ public class TimePreference extends DialogPreference {
 
         picker.setIs24HourView(true);
 
+
         return(picker);
     }
 
     @Override
     protected void onBindDialogView(View v) {
         super.onBindDialogView(v);
+        // get last saved time and display it
+
+
 
         picker.setCurrentHour(lastHour);
         picker.setCurrentMinute(lastMinute);
@@ -74,12 +104,7 @@ public class TimePreference extends DialogPreference {
             // save new time
             sharedPreferences.edit().putString("key_pref_trigger_time", time).commit();
 
-
-            // cancel the old alarm and set a new one
-            InitAlarmManager.cancelAlarmManager(getContext());
-            InitAlarmManager.setAlarmManager(getContext());
-
-            Toast.makeText(getContext(), time, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), time, Toast.LENGTH_SHORT).show();
             if (callChangeListener(time)) {
                 persistString(time);
             }

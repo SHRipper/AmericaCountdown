@@ -13,10 +13,6 @@
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_24dp"
             android:title="Settings" />
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/help_circle"
-            android:title="About" />
 
     </group>
 </menu>

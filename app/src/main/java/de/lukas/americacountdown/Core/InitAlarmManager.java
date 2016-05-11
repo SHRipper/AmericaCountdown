@@ -10,7 +10,6 @@ import android.util.Log;
 
 import java.util.Calendar;
 
-import de.lukas.americacountdown.R;
 import de.lukas.americacountdown.Receiver.MyAlarmSchedulerReceiver;
 
 /**
@@ -25,17 +24,16 @@ public class InitAlarmManager {
     private static SharedPreferences sharedPreferences;
 
     public static void setAlarmManager(Context context) {
-        alarmIntent = new Intent(context, MyAlarmSchedulerReceiver.class);
-        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        pendingIntent = PendingIntent.getBroadcast(context, 101, alarmIntent, 0);
+        alarmIntent = new Intent(context.getApplicationContext(), MyAlarmSchedulerReceiver.class);
 
         Log.d("InitAlarmManager", "initializing alarm manager");
 
-        boolean alarmAlreadySet = (PendingIntent.getBroadcast(context, 101, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
-
+        boolean alarmAlreadySet = (PendingIntent.getBroadcast(context.getApplicationContext(), 101, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
         if (!alarmAlreadySet) {
 
             Log.d("InitAlarmManager", "alarm was not set before. Setting Alarm");
+            alarmManager = (AlarmManager) context.getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 101, alarmIntent, 0);
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getAlarmMillis(context), AlarmManager.INTERVAL_DAY, pendingIntent);
 
         } else {
@@ -43,10 +41,9 @@ public class InitAlarmManager {
         }
     }
 
-    public static void cancelAlarmManager(Context context){
-        alarmIntent = new Intent(context, MyAlarmSchedulerReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(context, 101, alarmIntent, 0);
-        alarmManager.cancel(pendingIntent);
+    public static void cancelAlarmManager(Context context) {
+        Log.d("InitAlarmManager", "cancelled alarm.");
+        PendingIntent.getBroadcast(context.getApplicationContext(), 101, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
     }
 
     //alarm um 6:30
@@ -56,12 +53,12 @@ public class InitAlarmManager {
         cal.setTimeInMillis(System.currentTimeMillis());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String triggerTime = sharedPreferences.getString("key_pref_trigger_time", "6 30");
-        Log.d("InitAlarmManager","triggerTime: " + triggerTime);
-        String [] parts = triggerTime.split(" ");
+        Log.d("InitAlarmManager", "triggerTime: " + triggerTime);
+        String[] parts = triggerTime.split(" ");
 
         int hour = Integer.valueOf(parts[0]);
         int minute = Integer.valueOf(parts[1]);
-        Log.d("InitAlarmManager","hour: " + hour + " minutes: " + minute);
+        Log.d("InitAlarmManager", "hour: " + hour + " minutes: " + minute);
 
         // if current time is greater than alarm manager trigger
         // then add one calendar day to avoid notification on startup

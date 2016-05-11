@@ -19,6 +19,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.prefs.PreferenceChangeListener;
 
 import de.lukas.americacountdown.Core.InitAlarmManager;
 import de.lukas.americacountdown.Preferences.TimePreference;
@@ -29,10 +30,10 @@ import de.lukas.americacountdown.Receiver.BootReceiver;
 /**
  * Created by Lukas on 10.05.2016.
  */
-public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener{
+public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener{
 
     SharedPreferences sharedPreferences;
-
+    TimePreference timePreference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +41,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         addPreferencesFromResource(R.xml.preferences_main);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //editor = sharedPreferences.edit();
 
         SwitchPreference showNotifications = (SwitchPreference) findPreference(getString(R.string.pref_key_display_notifications));
         showNotifications.setOnPreferenceClickListener(this);
+
+        timePreference = (TimePreference) findPreference("pref_key_trigger_time");
+        timePreference.setOnPreferenceChangeListener(this);
     }
 
 
@@ -68,8 +71,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equals(getString(R.string.pref_key_display_notifications))){
             boolean checked = ((SwitchPreference) preference).isChecked();
-            //editor.putBoolean(getString(R.string.pref_key_display_notifications), checked);
-            //editor.commit();
+
 
             if (checked){
                 InitAlarmManager.setAlarmManager(this);
@@ -100,6 +102,18 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         pm.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference.getKey().equals("pref_key_trigger_time")){
+            Log.d("SettingsActivity", "pref change trigger time");
+            preference.setSummary(timePreference.getSummary());
+
+            InitAlarmManager.cancelAlarmManager(this);
+            InitAlarmManager.setAlarmManager(this);
+        }
+        return false;
     }
 }
 
