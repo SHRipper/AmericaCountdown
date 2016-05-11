@@ -1,4 +1,4 @@
-package de.lukas.americacountdown;
+package de.lukas.americacountdown.Core;
 
 
 import android.app.Notification;
@@ -7,6 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
+
+import de.lukas.americacountdown.Activities.MainActivity;
+import de.lukas.americacountdown.R;
+import de.lukas.americacountdown.Utils.Calculator;
+
 /**
  * Created by Tim on 08.05.2016.
  */

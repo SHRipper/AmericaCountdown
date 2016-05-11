@@ -1,4 +1,4 @@
-package de.lukas.americacountdown;
+package de.lukas.americacountdown.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

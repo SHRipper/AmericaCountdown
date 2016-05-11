@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="color_datePicker">#7DADD4</color>
     <color name="color_txtDays">#FF4081</color>
+    <color name="color_toolbar_text">#ffffff</color>
 </resources>

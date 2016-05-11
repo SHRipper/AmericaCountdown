@@ -1,5 +1,6 @@
-package de.lukas.americacountdown;
+package de.lukas.americacountdown.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import de.lukas.americacountdown.Core.InitAlarmManager;
+import de.lukas.americacountdown.R;
+import de.lukas.americacountdown.Utils.Calculator;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,10 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView txtDaysLeft = (TextView) findViewById(R.id.txtDays);
         txtDaysLeft.setText(Calculator.getLeftDays());
 
-        //der MyAlarmReceiver wurde nie aufgerufen!
-        //Intent i = new Intent(this, MyAlarmReceiver.class);
-        //PendingIntent pi = PendingIntent.getBroadcast(this,0,i,PendingIntent.FLAG_CANCEL_CURRENT);
-
         InitAlarmManager.setAlarmManager(this);
     }
 
@@ -62,11 +63,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_countdown) {
-
+            startActivity(new Intent(this, MainActivity.class));
+            return true;
         } else if (id == R.id.nav_settings) {
-
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
         } else if (id == R.id.nav_about) {
-
+            startActivity(new Intent (this, AboutActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

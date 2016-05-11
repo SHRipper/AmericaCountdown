@@ -1,10 +1,28 @@
 <resources>
-    <string name="app_name">Countdown</string>
+    <!-- App Name -->
+    <string name="app_name">Amerika Countdown</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="text_days_left">128</string>
     <string name="text_pre_message">Ab heute noch</string>
     <string name="text_post_message">mal schlafen!!!</string>
+
+    <!-- Acitvities -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_main">Countdown</string>
+    <string name="title_activity_about">About</string>
+
+
+    <!-- Preferences -->
+
+    <!-- Keys -->
+    <string name="pref_key_display_notifications">pref_key_display_notifications</string>
+    <string name="pref_key_trigger_time">pref_key_trigger_time</string>
+
+    <!-- Titles -->
+    <string name="pref_title_display_notifications">Benachrichtigungen anzeigen</string>
+    <string name="pref_title_trigger_time">Trigger time</string>
 
 </resources>
