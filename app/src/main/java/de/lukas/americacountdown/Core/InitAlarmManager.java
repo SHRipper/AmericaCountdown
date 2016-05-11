@@ -25,34 +25,27 @@ public class InitAlarmManager {
     private static SharedPreferences sharedPreferences;
 
     public static void setAlarmManager(Context context) {
-
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean displayNotifications = sharedPreferences.getBoolean("key_pref_display_notifications", true);
-
         alarmIntent = new Intent(context, MyAlarmSchedulerReceiver.class);
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         pendingIntent = PendingIntent.getBroadcast(context, 101, alarmIntent, 0);
 
-        if (displayNotifications) {
+        Log.d("InitAlarmManager", "initializing alarm manager");
 
-            Log.d("InitAlarmManager", "initializing alarm manager");
+        boolean alarmAlreadySet = (PendingIntent.getBroadcast(context, 101, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
 
-            boolean alarmAlreadySet = (PendingIntent.getBroadcast(context, 101, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
+        if (!alarmAlreadySet) {
 
-            if (!alarmAlreadySet) {
+            Log.d("InitAlarmManager", "alarm was not set before. Setting Alarm");
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getAlarmMillis(context), AlarmManager.INTERVAL_DAY, pendingIntent);
 
-                Log.d("InitAlarmManager", "alarm was not set before. Setting Alarm");
-                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getAlarmMillis(context), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-            } else {
-                Log.d("InitAlarmManager", "alarm was set before. do nothing.");
-            }
-        }else{
-            Log.d("InitAlarmManager", "Notifications are disabled. No alarm was set.");
+        } else {
+            Log.d("InitAlarmManager", "alarm was set before. do nothing.");
         }
     }
 
     public static void cancelAlarmManager(Context context){
+        alarmIntent = new Intent(context, MyAlarmSchedulerReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(context, 101, alarmIntent, 0);
         alarmManager.cancel(pendingIntent);
     }
 
