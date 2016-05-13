@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dateContainer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_datePicker"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imgAppIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-110dp"
+        android:layout_marginTop="13dp"
+        android:layout_toRightOf="@id/dateContainer"
+        android:src="@drawable/app_icon_x96" />
+
+    <TextView
+        android:id="@+id/txtYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dateContainer"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Jahr"
+        android:textColor="@color/color_toolbar_text"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dateContainer"
+        android:layout_below="@id/txtYear"
+        android:layout_marginLeft="20dp"
+        android:text="Datum"
+        android:textColor="@color/color_toolbar_text"
+        android:textSize="33dp" />
+</RelativeLayout>

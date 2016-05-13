@@ -5,6 +5,9 @@
             android:id="@+id/nav_countdown"
             android:icon="@drawable/calendar_blank"
             android:title="Countdown" />
+        <item android:id="@+id/nav_timer"
+            android:icon="@drawable/camera_timer"
+            android:title="Timer"/>
     </group>
 
 
