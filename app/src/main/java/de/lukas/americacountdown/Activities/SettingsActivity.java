@@ -70,15 +70,20 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equals(getString(R.string.pref_key_display_notifications))){
-            boolean checked = ((SwitchPreference) preference).isChecked();
+            boolean isChecked = ((SwitchPreference) preference).isChecked();
 
 
-            if (checked){
+            if (isChecked){
                 InitAlarmManager.setAlarmManager(this);
                 enableBootReceiver();
+
+                preference.setSummary("Anzeigen");
             }else{
                 InitAlarmManager.cancelAlarmManager(this);
                 disableBootReceiver();
+
+                preference.setSummary("Verbergen");
+
             }
             Log.d("Preferences","" + sharedPreferences.getBoolean(getString(R.string.pref_key_display_notifications), true));
         }

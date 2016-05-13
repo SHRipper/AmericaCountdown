@@ -22,7 +22,7 @@
     <string name="pref_key_trigger_time">pref_key_trigger_time</string>
 
     <!-- Titles -->
-    <string name="pref_title_display_notifications">Benachrichtigungen anzeigen</string>
+    <string name="pref_title_display_notifications">Benachrichtigungen</string>
     <string name="pref_title_trigger_time">Benachrichtigungszeit</string>
 
 </resources>

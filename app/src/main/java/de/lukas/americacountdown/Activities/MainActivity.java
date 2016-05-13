@@ -14,6 +14,9 @@ import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import de.lukas.americacountdown.Core.InitAlarmManager;
 import de.lukas.americacountdown.R;
 import de.lukas.americacountdown.Utils.Calculator;
@@ -21,6 +24,7 @@ import de.lukas.americacountdown.Utils.Calculator;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DatePicker datePicker;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        datePicker = (DatePicker) findViewById(R.id.datePicker);
-        datePicker.setEnabled(false);
+        calendar = Calendar.getInstance(Locale.GERMANY);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+
+        TextView txtYear = (TextView) findViewById(R.id.txtYear);
+        TextView txtDate = (TextView) findViewById(R.id.txtDate);
+
+        txtYear.setText("" + calendar.get(Calendar.YEAR));
+        txtDate.setText(getDateString());
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,6 +64,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             Log.d("InitAlarmManager", "Notifications are disabled. No alarm was set.");
         }
+
+
+    }
+
+    private String getDateString(){
+
+        String dayOfMonth = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+
+        String[] months = {"Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
+        String month = months[calendar.get(Calendar.MONTH ) -1];
+
+        String [] weekdays = {"So.","Mo.","Di.","Mi.","Do.","Fr.","Sa."};
+        String weekday = weekdays[calendar.get(Calendar.DAY_OF_WEEK)-1];
+
+        String dateString = weekday + ", " + dayOfMonth + ". " + month;
+        return dateString;
+
     }
 
     @Override

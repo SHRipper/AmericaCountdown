@@ -12,37 +12,59 @@
     tools:context=".Activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <DatePicker
+
+
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:id="@+id/datePicker"
-        android:clickable="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_height="100dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@color/color_datePicker"
+        android:id="@+id/dateContainer"
         android:layout_marginTop="10dp"
-        android:headerBackground="@color/color_datePicker" />
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/app_icon_x96"
-        android:layout_marginTop="9dp"
-        android:layout_marginLeft="-120dp"
-        android:layout_toEndOf="@id/datePicker"
-        android:layout_toRightOf="@id/datePicker"
+        android:layout_toRightOf="@id/dateContainer"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="-110dp"
+        android:id="@+id/imgAppIcon" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jahr"
+        android:layout_alignLeft="@id/dateContainer"
+        android:id="@+id/txtYear"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/color_toolbar_text"
+        android:layout_marginTop="25dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Datum"
+        android:id="@+id/txtDate"
+        android:textColor="@color/color_toolbar_text"
+        android:layout_below="@id/txtYear"
+        android:layout_alignLeft="@id/dateContainer"
+        android:layout_marginLeft="20dp"
+        android:textSize="33dp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/dateContainer"
         android:id="@+id/txtPreMessage"
         android:text="@string/text_pre_message"
         android:textSize="40dp"
-        android:textAlignment="center"
-        android:layout_below="@id/datePicker"
-        />
+        android:textAlignment="center" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

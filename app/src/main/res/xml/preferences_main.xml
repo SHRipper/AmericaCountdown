@@ -3,7 +3,7 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="@string/pref_key_display_notifications"
-        android:title="@string/pref_title_display_notifications" />
+        android:title="@string/pref_title_display_notifications"/>
 
     <de.lukas.americacountdown.Preferences.TimePreference
         android:key="@string/pref_key_trigger_time"
