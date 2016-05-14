@@ -15,13 +15,12 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import de.lukas.americacountdown.Core.InitAlarmManager;
 import de.lukas.americacountdown.R;
 import de.lukas.americacountdown.Utils.Calculator;
-import de.lukas.americacountdown.Utils.DateStringCreator;
+import de.lukas.americacountdown.Utils.TimeStringCreator;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView txtYear = (TextView) findViewById(R.id.txtYear);
         TextView txtDate = (TextView) findViewById(R.id.txtDate);
 
-        txtYear.setText(DateStringCreator.getYearString());
-        txtDate.setText(DateStringCreator.getDateString());
+        txtYear.setText(TimeStringCreator.getYearString());
+        txtDate.setText(TimeStringCreator.getDateString());
 
 
 

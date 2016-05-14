@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Created by Lukas on 13.05.2016.
  */
-public class DateStringCreator {
+public class TimeStringCreator {
     private static Calendar calendar = Calendar.getInstance(Locale.GERMANY);
 
     public static String getDateString(){
@@ -28,5 +28,18 @@ public class DateStringCreator {
     public static String getYearString(){
         return "" + calendar.get(Calendar.YEAR);
 
+    }
+
+    public static String getCurrentTimeInSeconds(){
+        long timeInMillis = calendar.getTimeInMillis();
+        int seconds, minutes, hours;
+
+        hours = (int) timeInMillis % (1000 * 60 * 60);
+        timeInMillis -= hours * 1000 * 60 * 60;
+        minutes = (int) timeInMillis %(1000 * 60);
+        timeInMillis -= minutes  * 1000* 60;
+        seconds = (int) timeInMillis % 1000;
+
+        return hours +":"+ minutes+"."+seconds;
     }
 }

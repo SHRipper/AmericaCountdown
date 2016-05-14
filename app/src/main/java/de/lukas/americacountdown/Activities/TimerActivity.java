@@ -7,25 +7,29 @@ import android.util.Log;
 import android.widget.TextView;
 
 import de.lukas.americacountdown.R;
-import de.lukas.americacountdown.Utils.DateStringCreator;
+import de.lukas.americacountdown.Utils.TimeStringCreator;
 
 public class TimerActivity extends AppCompatActivity {
 
     private final int interval = 1000; // 1 Second
     private Handler handler = new Handler();
     private int delay = 1000;
+    TextView txtYear;
+    TextView txtDate;
+    TextView txtTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
-        TextView txtYear = (TextView) findViewById(R.id.txtYear);
-        TextView txtDate = (TextView) findViewById(R.id.txtDate);
-        TextView txtTimer = (TextView) findViewById(R.id.txtTimer);
+        txtYear = (TextView) findViewById(R.id.txtYear);
+        txtDate = (TextView) findViewById(R.id.txtDate);
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
 
-        txtYear.setText(DateStringCreator.getYearString());
-        txtDate.setText(DateStringCreator.getDateString());
+        txtTimer.setText(TimeStringCreator.getCurrentTimeInSeconds());
+        txtYear.setText(TimeStringCreator.getYearString());
+        txtDate.setText(TimeStringCreator.getDateString());
     }
 
     @Override
@@ -54,6 +58,8 @@ public class TimerActivity extends AppCompatActivity {
             handler.postDelayed(this, delay);
 
             Log.d("Timer", "Timer tick");
+            txtTimer.setText(TimeStringCreator.getCurrentTimeInSeconds());
+
         }
     };
 
