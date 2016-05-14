@@ -16,7 +16,7 @@ public class DateStringCreator {
         String dayOfMonth = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
 
         String[] months = {"Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
-        String month = months[calendar.get(Calendar.MONTH ) -1];
+        String month = months[calendar.get(Calendar.MONTH )];
 
         String [] weekdays = {"So.","Mo.","Di.","Mi.","Do.","Fr.","Sa."};
         String weekday = weekdays[calendar.get(Calendar.DAY_OF_WEEK)-1];
