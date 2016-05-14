@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
 
         calendar = Calendar.getInstance(Locale.GERMANY);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_main);
         navigationView.setNavigationItemSelectedListener(this);
 
 

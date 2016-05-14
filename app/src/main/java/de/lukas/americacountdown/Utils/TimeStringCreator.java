@@ -11,6 +11,7 @@ import java.util.Locale;
 public class TimeStringCreator {
     private static Calendar calendar = Calendar.getInstance(Locale.GERMANY);
 
+
     public static String getDateString(){
 
         String dayOfMonth = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
@@ -31,15 +32,22 @@ public class TimeStringCreator {
     }
 
     public static String getCurrentTimeInSeconds(){
-        long timeInMillis = calendar.getTimeInMillis();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        Calendar flightTime = Calendar.getInstance(Locale.GERMANY);
+        flightTime.setTimeInMillis(System.currentTimeMillis());
+        flightTime.set(Calendar.DAY_OF_MONTH,11);
+        flightTime.set(Calendar.MONTH, Calendar.SEPTEMBER);
+        flightTime.set(Calendar.HOUR_OF_DAY, 10);
+        flightTime.set(Calendar.MINUTE, 40);
+        flightTime.set(Calendar.SECOND, 0);
+
+        long timeInMillis = flightTime.getTimeInMillis() - calendar.getTimeInMillis();
         int seconds, minutes, hours;
 
-        hours = (int) timeInMillis % (1000 * 60 * 60);
-        timeInMillis -= hours * 1000 * 60 * 60;
-        minutes = (int) timeInMillis %(1000 * 60);
-        timeInMillis -= minutes  * 1000* 60;
-        seconds = (int) timeInMillis % 1000;
+        seconds = (int) (timeInMillis / 1000) % 60;
+        minutes = (int) (timeInMillis / (1000 * 60)) % 60;
+        hours = (int) (timeInMillis / (1000*60*60));
 
-        return hours +":"+ minutes+"."+seconds;
+        return hours +":"+ minutes+":"+seconds;
     }
 }

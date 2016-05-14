@@ -3,7 +3,6 @@ package de.lukas.americacountdown.Activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import de.lukas.americacountdown.R;
@@ -16,7 +15,10 @@ public class TimerActivity extends AppCompatActivity {
     private int delay = 1000;
     TextView txtYear;
     TextView txtDate;
-    TextView txtTimer;
+    TextView txtHour;
+    TextView txtMinute;
+    TextView txtSecond;
+    String[] parts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +27,43 @@ public class TimerActivity extends AppCompatActivity {
 
         txtYear = (TextView) findViewById(R.id.txtYear);
         txtDate = (TextView) findViewById(R.id.txtDate);
-        txtTimer = (TextView) findViewById(R.id.txtTimer);
+        txtHour = (TextView) findViewById(R.id.txtHours);
+        txtMinute = (TextView) findViewById(R.id.txtMinutes);
+        txtSecond = (TextView) findViewById(R.id.txtSeconds);
 
-        txtTimer.setText(TimeStringCreator.getCurrentTimeInSeconds());
+        setTimer();
+
         txtYear.setText(TimeStringCreator.getYearString());
         txtDate.setText(TimeStringCreator.getDateString());
+    }
+
+    private void setTimer() {
+        String time = TimeStringCreator.getCurrentTimeInSeconds();
+        parts = time.split(":");
+
+        String second, minute, hour;
+
+
+        if (parts[0].equals("1")) {
+            hour = " Stunde";
+        } else {
+            hour = " Stunden";
+        }
+
+        if (parts[1].equals("1")) {
+            minute = " Minute";
+        } else {
+            minute = " Minuten";
+        }
+
+        if (parts[2].equals("1")) {
+            second = " Sekunde";
+        } else {
+            second = " Sekunden";
+        }
+        txtHour.setText(parts[0] + hour);
+        txtMinute.setText(parts[1] + minute);
+        txtSecond.setText(parts[2] + second);
     }
 
     @Override
@@ -57,9 +91,7 @@ public class TimerActivity extends AppCompatActivity {
         public void run() {
             handler.postDelayed(this, delay);
 
-            Log.d("Timer", "Timer tick");
-            txtTimer.setText(TimeStringCreator.getCurrentTimeInSeconds());
-
+            setTimer();
         }
     };
 

@@ -22,7 +22,8 @@
         </activity>
 
         <!-- Timer -->
-        <activity android:name=".Activities.TimerActivity"
+        <activity
+            android:name=".Activities.TimerActivity"
             android:label="@string/title_activity_timer">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

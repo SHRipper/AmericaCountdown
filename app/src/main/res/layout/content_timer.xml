@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,64 +8,67 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.lukas.americacountdown.Activities.TimerActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activities.MainActivity"
+    tools:showIn="@layout/app_bar_timer">
 
-    <include layout="@layout/content_header"
+    <include
+        android:id="@+id/content_header"
+        layout="@layout/content_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/content_header"/>
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/content_header"
         android:id="@+id/txtPreMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content_header"
+        android:layout_marginTop="30dp"
         android:text="Noch"
-        android:textSize="40dp"
         android:textAlignment="center"
-        />
+        android:textSize="40dp" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textColor="@color/color_txtDays"
         android:id="@+id/txtHours"
-        android:text="--time--"
-        android:textSize="30dp"
-        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/txtPreMessage"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/color_txtDays"
-        android:id="@+id/txtMinutes"
-        android:text="--time--"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:layout_below="@id/txtHours"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/color_txtDays"
-        android:id="@+id/txtSeconds"
-        android:text="--time--"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:layout_below="@id/txtMinutes"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:id="@+id/txtPostMessage"
-        android:text="bis zum Flug!!!"
-        android:textSize="40dp"
+        android:text="--time--"
         android:textAlignment="center"
+        android:textColor="@color/color_txtDays"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/txtMinutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtHours"
+        android:layout_marginTop="10dp"
+        android:text="--time--"
+        android:textAlignment="center"
+        android:textColor="@color/color_txtDays"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/txtSeconds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtMinutes"
+        android:layout_marginTop="10dp"
+        android:text="--time--"
+        android:textAlignment="center"
+        android:textColor="@color/color_txtDays"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/txtPostMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/txtSeconds"
-        />
+        android:layout_marginTop="40dp"
+        android:text="bis zum Flug!!!"
+        android:textAlignment="center"
+        android:textSize="40dp" />
 
 </RelativeLayout>
