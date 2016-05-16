@@ -55,12 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         if (id == R.id.nav_countdown) {
-            //startActivity(new Intent(this, MainActivity.class));
             fragment = new CountdownFragment();
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_timer) {
-            //startActivity(new Intent(this, TimerActivity.class));
             fragment = new TimerFragment();
         }
         try {
@@ -74,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
 
 
+    }
+
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
     }
 
 

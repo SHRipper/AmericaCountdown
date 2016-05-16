@@ -32,10 +32,8 @@ public class CountdownFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main,container,false);
 
-
         calendar = Calendar.getInstance(Locale.GERMANY);
         calendar.setTimeInMillis(System.currentTimeMillis());
-
 
         TextView txtYear = (TextView) view.findViewById(R.id.txtYear);
         TextView txtDate = (TextView) view.findViewById(R.id.txtDate);
@@ -51,6 +49,9 @@ public class CountdownFragment extends Fragment {
         } else {
             Log.d("InitAlarmManager", "Notifications are disabled. No alarm was set.");
         }
+
+        ((MainActivity) getActivity()).setActionBarTitle("Countdown");
+
         return  view;
     }
 }

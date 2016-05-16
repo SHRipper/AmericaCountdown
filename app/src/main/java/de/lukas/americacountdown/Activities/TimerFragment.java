@@ -44,6 +44,8 @@ public class TimerFragment extends Fragment {
         txtYear.setText(TimeStringCreator.getYearString());
         txtDate.setText(TimeStringCreator.getDateString());
 
+        ((MainActivity) getActivity()).setActionBarTitle("Timer");
+
         return view;
     }
 
