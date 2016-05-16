@@ -1,6 +1,5 @@
 package de.lukas.americacountdown.Activities;
 
-import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -15,11 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import java.util.List;
-import java.util.prefs.PreferenceChangeListener;
 
 import de.lukas.americacountdown.Core.InitAlarmManager;
 import de.lukas.americacountdown.Preferences.TimePreference;
@@ -37,7 +31,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.preferences_main);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -47,6 +40,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         timePreference = (TimePreference) findPreference("pref_key_trigger_time");
         timePreference.setOnPreferenceChangeListener(this);
+
+        if(showNotifications.isChecked()){
+            showNotifications.setSummary("Anzeigen");
+        }else{
+            showNotifications.setSummary("Verbergen");
+        }
     }
 
 
@@ -55,7 +54,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         super.onPostCreate(savedInstanceState);
 
         LinearLayout root = (LinearLayout) findViewById(android.R.id.list).getParent().getParent().getParent();
-        Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
+        Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.toolbar_settings, root, false);
         bar.setTitleTextColor(ContextCompat.getColor(this,R.color.color_toolbar_text));
         root.addView(bar, 0); // insert at top
         bar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -117,6 +116,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
             InitAlarmManager.cancelAlarmManager(this);
             InitAlarmManager.setAlarmManager(this);
+
         }
         return false;
     }
