@@ -1,4 +1,4 @@
-package de.lukas.americacountdown.Activities;
+package de.lukas.americacountdown.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import de.lukas.americacountdown.Activities.MainActivity;
 import de.lukas.americacountdown.R;
 import de.lukas.americacountdown.Utils.TimeStringCreator;
 

@@ -1,4 +1,4 @@
-package de.lukas.americacountdown.Activities;
+package de.lukas.americacountdown.Fragments;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Locale;
 
+import de.lukas.americacountdown.Activities.MainActivity;
 import de.lukas.americacountdown.Core.InitAlarmManager;
 import de.lukas.americacountdown.R;
 import de.lukas.americacountdown.Utils.Calculator;

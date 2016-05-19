@@ -2,12 +2,18 @@
     <!-- App Name -->
     <string name="app_name">Amerika Countdown</string>
 
+    <!-- Navigaion drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- Textview contents of countdown fragment-->
     <string name="text_days_left">128</string>
-    <string name="text_pre_message">Ab heute noch</string>
-    <string name="text_post_message">mal schlafen!!!</string>
+    <string name="text_counter_pre_message">Ab heute noch</string>
+    <string name="text_counter_post_message">mal schlafen!!!</string>
+
+    <!-- Textview contents of timer fragment -->
+    <string name="text_timer_pre_message">Noch</string>
+    <string name="text_timer_post_message">bis zum Flug!!!</string>
 
     <!-- Acitvities -->
     <string name="title_activity_settings">Einstellungen</string>
@@ -20,12 +26,21 @@
     <!-- Keys -->
     <string name="pref_key_display_notifications">pref_key_display_notifications</string>
     <string name="pref_key_trigger_time">pref_key_trigger_time</string>
+    <string name="pref_key_start_fragment">pref_key_start_fragment</string>
 
     <!-- Titles -->
     <string name="pref_title_display_notifications">Benachrichtigungen</string>
     <string name="pref_title_trigger_time">Benachrichtigungszeit</string>
+    <string name="pref_title_start_fragment">Startseite</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Default Values -->
+    <string name="pref_default_display_notifications">true</string>
+    <string name="pref_default_trigger_time">8:30</string>
+    <string name="pref_default_start_fragment">Countdown</string>
 
+    <!-- List entries for list preference -->
+    <string-array name="start_fragment_entries">
+        <item>Countdown</item>
+        <item>Timer</item>
+    </string-array>
 </resources>

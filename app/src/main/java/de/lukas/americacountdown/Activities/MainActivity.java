@@ -1,7 +1,9 @@
 package de.lukas.americacountdown.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
+import de.lukas.americacountdown.Fragments.CountdownFragment;
+import de.lukas.americacountdown.Fragments.TimerFragment;
 import de.lukas.americacountdown.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +40,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_main);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fragmentManager.beginTransaction().replace(R.id.flContent, new CountdownFragment()).commit();
+
+        setStartFragment();
+    }
+
+    private void setStartFragment() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String startFragment = sharedPreferences.getString("pref_key_start_fragment", "null");
+        Fragment fragment = null;
+
+        Log.d("MainActivity", "start fragment: " + startFragment);
+
+        switch (startFragment) {
+            case "Countdown":
+                fragment = new CountdownFragment();
+                break;
+            case "Timer":
+                fragment = new TimerFragment();
+                break;
+        }
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
     @Override
@@ -61,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_timer) {
             fragment = new TimerFragment();
         }
+
+        // Replace current content with the fragment content
         try {
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         } catch (NullPointerException ex) {
@@ -70,11 +96,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-
-
     }
 
-    public void setActionBarTitle(String title){
+    // set actionbar title for different fragments
+    public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
 

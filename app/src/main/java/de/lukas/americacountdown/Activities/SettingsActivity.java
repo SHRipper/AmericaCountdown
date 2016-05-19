@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -24,38 +25,49 @@ import de.lukas.americacountdown.Receiver.BootReceiver;
 /**
  * Created by Lukas on 10.05.2016.
  */
-public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener{
+public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
     SharedPreferences sharedPreferences;
     TimePreference timePreference;
+    ListPreference startFragmentPreference;
+    SwitchPreference showNotifications;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_main);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = getPreferenceManager().getSharedPreferences();
 
-        SwitchPreference showNotifications = (SwitchPreference) findPreference(getString(R.string.pref_key_display_notifications));
+        showNotifications = (SwitchPreference) findPreference(getString(R.string.pref_key_display_notifications));
         showNotifications.setOnPreferenceClickListener(this);
 
         timePreference = (TimePreference) findPreference("pref_key_trigger_time");
         timePreference.setOnPreferenceChangeListener(this);
 
-        if(showNotifications.isChecked()){
+        startFragmentPreference = (ListPreference) findPreference("pref_key_start_fragment");
+        startFragmentPreference.setOnPreferenceChangeListener(this);
+
+        setShowNotificationsPrefSummary();
+
+        startFragmentPreference.setSummary(sharedPreferences.getString(getString(R.string.pref_key_start_fragment),"null"));
+    }
+
+    private void setShowNotificationsPrefSummary(){
+        if (showNotifications.isChecked()) {
             showNotifications.setSummary("Anzeigen");
-        }else{
+        } else {
             showNotifications.setSummary("Verbergen");
         }
     }
-
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+        // Add a custom toolbar to the activity
         LinearLayout root = (LinearLayout) findViewById(android.R.id.list).getParent().getParent().getParent();
         Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.toolbar_settings, root, false);
-        bar.setTitleTextColor(ContextCompat.getColor(this,R.color.color_toolbar_text));
+        bar.setTitleTextColor(ContextCompat.getColor(this, R.color.color_toolbar_text));
         root.addView(bar, 0); // insert at top
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,23 +80,23 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals(getString(R.string.pref_key_display_notifications))){
+        if (preference.getKey().equals(getString(R.string.pref_key_display_notifications))) {
             boolean isChecked = ((SwitchPreference) preference).isChecked();
 
 
-            if (isChecked){
+            if (isChecked) {
                 InitAlarmManager.setAlarmManager(this);
                 enableBootReceiver();
 
                 preference.setSummary("Anzeigen");
-            }else{
+            } else {
                 InitAlarmManager.cancelAlarmManager(this);
                 disableBootReceiver();
 
                 preference.setSummary("Verbergen");
 
             }
-            Log.d("Preferences","" + sharedPreferences.getBoolean(getString(R.string.pref_key_display_notifications), true));
+            Log.d("Preferences", "" + sharedPreferences.getBoolean(getString(R.string.pref_key_display_notifications), true));
         }
         return false;
     }
@@ -110,13 +122,17 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference.getKey().equals("pref_key_trigger_time")){
+        if (preference.getKey().equals("pref_key_trigger_time")) {
             Log.d("SettingsActivity", "pref change trigger time");
             preference.setSummary(timePreference.getSummary());
 
             InitAlarmManager.cancelAlarmManager(this);
             InitAlarmManager.setAlarmManager(this);
-
+        }
+        if (preference.getKey().equals("pref_key_start_fragment")) {
+            Log.d("SettingsActivity", "new Value: " + newValue);
+            sharedPreferences.edit().putString("pref_key_start_fragment", (String)newValue).apply();
+            preference.setSummary((String) newValue);
         }
         return false;
     }
