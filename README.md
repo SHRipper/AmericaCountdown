@@ -1,7 +1,6 @@
 # AmericaCountdown
 
 
-
 <h3>Content</h3>
 
 This Application calculates the nights we have to sleep until we fly to America.
@@ -13,12 +12,12 @@ Furthermore it has a timer, which gives a live countdown of the hours, minutes a
 <h3>Customization</h3>
 
 <ul>
-  <li>Show or hide Notifications</li>
-  <li>Show or hide Notifications</li>
-  <li>Show or hide Notifications</li>
-  <li>Show or hide Notifications</li>
-  <li>Show or hide Notifications</li>
+  <li>Set your prefered starting view (Timer or Countdown)</li>
+  <li>Show or hide notifications</li>
+  <li>Set a time on which the notificaiton should appear</li>
 </ul>
+
+
 
 
 <h5>P.S. This is my first fully developed applicaiton!</h5> 
