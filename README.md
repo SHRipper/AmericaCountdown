@@ -14,6 +14,10 @@ Furthermore it has a timer, which gives a live countdown of the hours, minutes a
 
 <ul>
   <li>Show or hide Notifications</li>
+  <li>Show or hide Notifications</li>
+  <li>Show or hide Notifications</li>
+  <li>Show or hide Notifications</li>
+  <li>Show or hide Notifications</li>
 </ul>
 
 
