@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -42,24 +41,25 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         showNotifications = (SwitchPreference) findPreference(getString(R.string.pref_key_display_notifications));
         showNotifications.setOnPreferenceClickListener(this);
 
-        timePreference = (TimePreference) findPreference("pref_key_trigger_time");
+        timePreference = (TimePreference) findPreference(getString(R.string.pref_key_trigger_time));
         timePreference.setOnPreferenceChangeListener(this);
 
-        startFragmentPreference = (ListPreference) findPreference("pref_key_start_fragment");
+        startFragmentPreference = (ListPreference) findPreference(getString(R.string.pref_key_start_fragment));
         startFragmentPreference.setOnPreferenceChangeListener(this);
 
         setShowNotificationsPrefSummary();
 
-        startFragmentPreference.setSummary(sharedPreferences.getString(getString(R.string.pref_key_start_fragment),"null"));
+        startFragmentPreference.setSummary(sharedPreferences.getString(getString(R.string.pref_key_start_fragment), getString(R.string.pref_default_start_fragment)));
     }
 
-    private void setShowNotificationsPrefSummary(){
+    private void setShowNotificationsPrefSummary() {
         if (showNotifications.isChecked()) {
             showNotifications.setSummary("Anzeigen");
         } else {
             showNotifications.setSummary("Verbergen");
         }
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -69,6 +69,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.toolbar_settings, root, false);
         bar.setTitleTextColor(ContextCompat.getColor(this, R.color.color_toolbar_text));
         root.addView(bar, 0); // insert at top
+
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +95,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 disableBootReceiver();
 
                 preference.setSummary("Verbergen");
-
             }
             Log.d("Preferences", "" + sharedPreferences.getBoolean(getString(R.string.pref_key_display_notifications), true));
         }
@@ -121,20 +121,25 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference.getKey().equals("pref_key_trigger_time")) {
+        if (preference.getKey().equals(getString(R.string.pref_key_trigger_time))) {
             Log.d("SettingsActivity", "pref change trigger time");
             preference.setSummary(timePreference.getSummary());
 
             InitAlarmManager.cancelAlarmManager(this);
             InitAlarmManager.setAlarmManager(this);
         }
-        if (preference.getKey().equals("pref_key_start_fragment")) {
+        if (preference.getKey().equals(getString(R.string.pref_key_start_fragment))) {
             Log.d("SettingsActivity", "new Value: " + newValue);
-            sharedPreferences.edit().putString("pref_key_start_fragment", (String)newValue).apply();
             preference.setSummary((String) newValue);
         }
-        return false;
+        return true;
     }
 }
 

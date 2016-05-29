@@ -20,6 +20,9 @@
     <string name="title_activity_main">Countdown</string>
     <string name="title_activity_timer">Timer</string>
 
+    <!-- Messages -->
+    <string name="message_on_back_press">Erneut Zurück-Taste drücken um die Anwendung zu verlassen!</string>
+
 
     <!-- Preferences -->
 

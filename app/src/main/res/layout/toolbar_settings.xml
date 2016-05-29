@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/settings_toolbar"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:minHeight="?attr/actionBarSize"
-    android:background="@color/colorPrimaryDark"
-    app:theme="@style/ToolbarColoredBackArrow"
-    app:navigationIcon="?attr/homeAsUpIndicator"
-    app:title="Einstellungen" />
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/settings_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title="Einstellungen"
+        android:elevation="4dp"/>
+

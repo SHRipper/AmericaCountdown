@@ -19,7 +19,6 @@ import de.lukas.americacountdown.Utils.TimeStringCreator;
  */
 public class TimerFragment extends Fragment {
 
-    private final int interval = 1000; // 1 Second
     private Handler handler = new Handler();
     private int delay = 1000;
     TextView txtYear;
@@ -93,14 +92,14 @@ public class TimerFragment extends Fragment {
 
 
     private void startHandler() {
-        handler.postDelayed(runnable, delay);
+        handler.post(timerRunnable);
     }
 
     private void stopHandler() {
-        handler.removeCallbacks(runnable);
+        handler.removeCallbacks(timerRunnable);
     }
 
-    private Runnable runnable = new Runnable() {
+    private Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             handler.postDelayed(this, delay);

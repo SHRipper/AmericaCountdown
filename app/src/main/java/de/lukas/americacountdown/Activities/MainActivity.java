@@ -3,6 +3,7 @@ package de.lukas.americacountdown.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import de.lukas.americacountdown.Fragments.CountdownFragment;
 import de.lukas.americacountdown.Fragments.TimerFragment;
@@ -22,6 +24,8 @@ import de.lukas.americacountdown.R;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
+
+    boolean canExit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setStartFragment() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String startFragment = sharedPreferences.getString("pref_key_start_fragment", "null");
+        String startFragment = sharedPreferences.getString(getString(R.string.pref_key_start_fragment), getString(R.string.pref_default_start_fragment));
         Fragment fragment = null;
 
         Log.d("MainActivity", "start fragment: " + startFragment);
@@ -67,9 +71,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        else {
+            if (canExit) {
+                super.onBackPressed();
+            } else {
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.message_on_back_press), Toast.LENGTH_SHORT).show();
+                canExit = true;
+                Handler onBackPressHandler = new Handler();
+                onBackPressHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        canExit = false;
+                    }
+                }, 3000);
+            }
+        }
+
     }
 
     @Override
