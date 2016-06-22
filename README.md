@@ -20,4 +20,4 @@ Furthermore it has a timer, which gives a live countdown of the hours, minutes a
 
 
 
-<br/><h5>P.S. This is my first fully developed applicaiton!</h5> 
+<br/><h5>P.S. This is my first "fully" developed applicaiton!</h5> 
